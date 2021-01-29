@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import * as esbuild from "esbuild-wasm";
+import CodeEditor from "./components/code-editor";
 import { unpkgPathPlugin, fetchPlugin } from "./plugins";
 
 const App = () => {
-  const [input, setInput] = useState("");
-  const [code, setCode] = useState("");
+  const [input, setInput] = useState<string>("");
   const serviceRef = useRef<any>(null);
+  const iframeRef = useRef<any>(null);
 
   const startService = async () => {
     serviceRef.current = await esbuild.startService({
@@ -24,6 +25,8 @@ const App = () => {
       return;
     }
 
+    iframeRef.current.srcdoc = html;
+
     const result = await serviceRef.current.build({
       entryPoints: ["index.js"],
       bundle: true,
@@ -35,16 +38,47 @@ const App = () => {
       },
     });
 
-    setCode(result.outputFiles[0].text);
+    iframeRef.current.contentWindow.postMessage(
+      result.outputFiles[0].text,
+      "*"
+    );
   };
+
+  const html = `
+    <html lang="en">
+        <head>
+        <title>preview</title>
+            <body>
+                <div id="root"></div>
+                <script>
+                    window.addEventListener('message', (event) => {
+                        try{
+                            
+                    eval(event.data);
+                        } catch (err) {
+                            const root = document.getElementById('root');
+                            root.innerHTML = '<div style="color: red;"><h4>'+ err +'</h4></div>'
+                            console.error(err);
+                        }
+                    }, false)
+                </script>
+            </body>
+        </head>
+    </html>
+`;
 
   return (
     <div>
-      <textarea value={input} onChange={(e) => setInput(e.target.value)} />
+      <CodeEditor initialValue='const a = "seb"' onChange={setInput} />
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
-      <pre>{code}</pre>
+      <iframe
+        ref={iframeRef}
+        title="preview"
+        srcDoc={html}
+        sandbox="allow-scripts"
+      />
     </div>
   );
 };
