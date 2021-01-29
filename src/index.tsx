@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import * as esbuild from "esbuild-wasm";
 import CodeEditor from "./components/code-editor";
 import { unpkgPathPlugin, fetchPlugin } from "./plugins";
+import "bulmaswatch/superhero/bulmaswatch.min.css";
 
 const App = () => {
   const [input, setInput] = useState<string>("");
