@@ -13,9 +13,7 @@ interface CodeEditorProps {
 }
 
 const CodeEditor: FC<CodeEditorProps> = ({ initialValue, onChange }) => {
-  const [language, setLanguage] = useState<"javascript" | "typescript">(
-    "javascript"
-  );
+  const [language] = useState<"javascript" | "typescript">("javascript");
   const editorRef = useRef<any>();
 
   const handleOnMount: OnMount = (editor, monaco) => {
@@ -50,9 +48,9 @@ const CodeEditor: FC<CodeEditorProps> = ({ initialValue, onChange }) => {
     editorRef.current.setValue(prettyCode);
   };
 
-  const handleLanguageChange = () => {
-    setLanguage(language === "javascript" ? "typescript" : "javascript");
-  };
+  // const handleLanguageChange = () => {
+  //   setLanguage(language === "javascript" ? "typescript" : "javascript");
+  // };
 
   // TODO : ADD LANGUAGES SUPPORT
   return (
