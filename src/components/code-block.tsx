@@ -1,25 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CodeEditor from "./code-editor";
 import bundler from "../bundler";
 import Preview from "./preview";
+import Resizable from "./resizable";
 
 const CodeBlock = () => {
   const [input, setInput] = useState<string>("");
   const [code, setCode] = useState<string>("");
 
-  const onClick = async () => {
-    const output = await bundler(input);
-    setCode(output);
-  };
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      console.log("entered timer", timer);
+      const output = await bundler(input);
+      setCode(output);
+    }, 1000);
+
+    return () => {
+      console.log("cleared", timer);
+      clearTimeout(timer);
+    };
+  }, [input]);
 
   return (
-    <div>
-      <CodeEditor initialValue='const a = "seb"' onChange={setInput} />
-      <div>
-        <button onClick={onClick}>Submit</button>
+    <Resizable direction="v">
+      <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
+        <Resizable direction="h">
+          <CodeEditor initialValue='const a = "seb"' onChange={setInput} />
+        </Resizable>
+        <Preview code={code} />
       </div>
-      <Preview code={code} />
-    </div>
+    </Resizable>
   );
 };
 

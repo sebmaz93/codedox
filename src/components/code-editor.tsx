@@ -63,19 +63,19 @@ const CodeEditor: FC<CodeEditorProps> = ({ initialValue, onChange }) => {
       >
         Format
       </button>
-      <button
-        className="button button-language is-small"
-        onClick={handleLanguageChange}
-      >
-        Change to : {language === "javascript" ? "typescript" : "javascript"}
-      </button>
+      {/*<button*/}
+      {/*  className="button button-language is-small"*/}
+      {/*  onClick={handleLanguageChange}*/}
+      {/*>*/}
+      {/*  Change to : {language === "javascript" ? "typescript" : "javascript"}*/}
+      {/*</button>*/}
       <MonacoEditor
         onMount={handleOnMount}
         onChange={handleOnChange}
         defaultValue={initialValue}
         theme="vs-dark"
         language={language}
-        height="500px"
+        height="100%"
         options={{
           wordWrap: "on",
           minimap: { enabled: false },

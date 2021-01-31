@@ -1,10 +1,11 @@
 .editor-wrapper {
   position: relative;
   height: 100%;
+  width: calc(100% - 10px);
   > .button-format {
     position: absolute;
-    top: 35px;
-    right: 5px;
+    top: 0;
+    right:0;
     z-index: 20;
     opacity: 0;
     transition:  opacity 0.3s;

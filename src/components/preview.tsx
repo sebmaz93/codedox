@@ -1,4 +1,5 @@
 import { useRef, useEffect, FC } from "react";
+import "./preview.scss";
 
 interface OwnProps {
   code: string;
@@ -9,16 +10,20 @@ const Preview: FC<OwnProps> = ({ code }) => {
 
   useEffect(() => {
     iframeRef.current.srcdoc = html;
-    iframeRef.current.contentWindow.postMessage(code, "*");
+    setTimeout(() => {
+      iframeRef.current.contentWindow.postMessage(code, "*");
+    }, 75);
   }, [code]);
 
   return (
-    <iframe
-      ref={iframeRef}
-      title="preview"
-      srcDoc={html}
-      sandbox="allow-scripts"
-    />
+    <div className="preview-wrapper">
+      <iframe
+        ref={iframeRef}
+        title="preview"
+        srcDoc={html}
+        sandbox="allow-scripts"
+      />
+    </div>
   );
 };
 
@@ -26,6 +31,10 @@ const html = `
     <html lang="en">
         <head>
         <title>preview</title>
+        <style>
+        html {background-color: white}
+</style>
+        </head>
             <body>
                 <div id="root"></div>
                 <script>
@@ -41,7 +50,6 @@ const html = `
                     }, false)
                 </script>
             </body>
-        </head>
     </html>
 `;
 
