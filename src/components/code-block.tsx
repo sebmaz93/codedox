@@ -10,13 +10,11 @@ const CodeBlock = () => {
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      console.log("entered timer", timer);
       const output = await bundler(input);
       setCode(output);
     }, 1000);
 
     return () => {
-      console.log("cleared", timer);
       clearTimeout(timer);
     };
   }, [input]);
