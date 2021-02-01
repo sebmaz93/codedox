@@ -3,6 +3,7 @@ import CodeEditor from "./code-editor";
 import bundler from "../bundler";
 import Preview from "./preview";
 import Resizable from "./resizable";
+import MdEditor from "./md-editor";
 
 const CodeBlock = () => {
   const [input, setInput] = useState<string>("");
@@ -23,6 +24,7 @@ const CodeBlock = () => {
 
   return (
     <Resizable direction="v">
+      <MdEditor />
       <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
         <Resizable direction="h">
           <CodeEditor initialValue='const a = "seb"' onChange={setInput} />
