@@ -24,13 +24,15 @@ const CodeBlock = () => {
 
   return (
     <Resizable direction="v">
-      <MdEditor />
-      <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
-        <Resizable direction="h">
-          <CodeEditor initialValue='const a = "seb"' onChange={setInput} />
-        </Resizable>
-        <Preview code={code} bundlerErr={err} />
-      </div>
+      <>
+        <MdEditor />
+        <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
+          <Resizable direction="h">
+            <CodeEditor initialValue='const a = "seb"' onChange={setInput} />
+          </Resizable>
+          <Preview code={code} bundlerErr={err} />
+        </div>
+      </>
     </Resizable>
   );
 };

@@ -1,12 +1,16 @@
 import ReactDOM from "react-dom";
 import CodeBlock from "./components/code-block";
 import "bulmaswatch/superhero/bulmaswatch.min.css";
+import { Provider } from "react-redux";
+import { store } from "./redux";
 
 const App = () => {
   return (
-    <div>
-      <CodeBlock />
-    </div>
+    <Provider store={store}>
+      <div>
+        <CodeBlock />
+      </div>
+    </Provider>
   );
 };
 
