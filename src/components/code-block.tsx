@@ -1,18 +1,23 @@
+import { useActions } from "hooks/use-actions";
 import { useState, useEffect } from "react";
+import { Block } from "reduxState";
 import CodeEditor from "./code-editor";
-import bundler from "../bundler";
+import bundler from "bundler";
 import Preview from "./preview";
 import Resizable from "./resizable";
-import MdEditor from "./md-editor";
 
-const CodeBlock = () => {
-  const [input, setInput] = useState<string>("");
+interface OwnProps {
+  block: Block;
+}
+
+const CodeBlock: React.FC<OwnProps> = ({ block }) => {
   const [code, setCode] = useState<string>("");
   const [err, setErr] = useState<string>("");
+  const { updateBlock } = useActions();
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      const output = await bundler(input);
+      const output = await bundler(block.content);
       setCode(output.code);
       setErr(output.err);
     }, 1000);
@@ -20,19 +25,19 @@ const CodeBlock = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [input]);
+  }, [block.content]);
 
   return (
     <Resizable direction="v">
-      <>
-        <MdEditor />
-        <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
-          <Resizable direction="h">
-            <CodeEditor initialValue='const a = "seb"' onChange={setInput} />
-          </Resizable>
-          <Preview code={code} bundlerErr={err} />
-        </div>
-      </>
+      <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
+        <Resizable direction="h">
+          <CodeEditor
+            initialValue={block.content}
+            onChange={(value) => updateBlock(block.id, value)}
+          />
+        </Resizable>
+        <Preview code={code} bundlerErr={err} />
+      </div>
     </Resizable>
   );
 };

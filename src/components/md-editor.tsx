@@ -1,11 +1,17 @@
 import MDEditor from "@uiw/react-md-editor";
+import { useActions } from "hooks/use-actions";
 import { FC, useState, useEffect, useRef } from "react";
 import "./md-editor.scss";
+import { Block } from "reduxState";
 
-const MdEditor: FC = () => {
+interface OwnProps {
+  block: Block;
+}
+
+const MdEditor: FC<OwnProps> = ({ block }) => {
   const [editing, setEditing] = useState<boolean>(false);
-  const [value, setValue] = useState<string | undefined>("**Hello world!!!**");
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const { updateBlock } = useActions();
 
   useEffect(() => {
     const listener = (event: MouseEvent) => {
@@ -28,14 +34,17 @@ const MdEditor: FC = () => {
   if (editing) {
     return (
       <div className="markdown-editor" ref={wrapperRef}>
-        <MDEditor value={value} onChange={setValue} />
+        <MDEditor
+          value={block.content}
+          onChange={(value) => updateBlock(block.id, value || "")}
+        />
       </div>
     );
   }
   return (
     <div className="markdown-editor card" onClick={() => setEditing(true)}>
       <div className="card-content">
-        <MDEditor.Markdown source={value || ""} />
+        <MDEditor.Markdown source={block.content || "click to edit"} />
       </div>
     </div>
   );
