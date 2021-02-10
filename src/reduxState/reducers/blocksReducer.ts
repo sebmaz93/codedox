@@ -16,8 +16,13 @@ interface BlocksState {
 const initialState: BlocksState = {
   loading: false,
   error: null,
-  order: [],
-  data: {},
+  order: ["123", "1323", "12323", "131323"],
+  data: {
+    123: { content: "", kind: "text", id: "123" },
+    1323: { content: "", kind: "code", id: "1323" },
+    12323: { content: "", kind: "text", id: "12323" },
+    131323: { content: "", kind: "code", id: "131323" },
+  },
 };
 
 const reducer = produce((state: BlocksState = initialState, action: Action) => {
