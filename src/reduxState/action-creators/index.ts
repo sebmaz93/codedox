@@ -1,12 +1,12 @@
-import { ActionType } from "../action-types";
+import {ActionType} from '../action-types'
 import {
   MoveBlockAction,
   DeleteBlockAction,
   InsertBlockAction,
   UpdateBlockAction,
-  Direction,
-} from "../actions";
-import { BlockKind } from "../block";
+  Direction
+} from '../actions'
+import {BlockKind} from '../block'
 
 export const moveBlock = (
   id: string,
@@ -16,19 +16,19 @@ export const moveBlock = (
     type: ActionType.MOVE_BLOCK,
     payload: {
       id,
-      direction,
-    },
-  };
-};
+      direction
+    }
+  }
+}
 
 export const deleteBlock = (id: string): DeleteBlockAction => {
   return {
     type: ActionType.DELETE_BLOCK,
     payload: {
-      id,
-    },
-  };
-};
+      id
+    }
+  }
+}
 
 export const insertBlockBefore = (
   id: string,
@@ -38,17 +38,17 @@ export const insertBlockBefore = (
     type: ActionType.INSERT_BLOCK_BEFORE,
     payload: {
       id,
-      kind,
-    },
-  };
-};
+      kind
+    }
+  }
+}
 
 export const updateBlock = (id: string, content: string): UpdateBlockAction => {
   return {
     type: ActionType.UPDATE_BLOCK,
     payload: {
       id,
-      content,
-    },
-  };
-};
+      content
+    }
+  }
+}

@@ -1,41 +1,41 @@
-import { ActionType } from "../action-types";
-import { BlockKind } from "../block";
+import {ActionType} from '../action-types'
+import {BlockKind} from '../block'
 
-export type Direction = "up" | "down";
+export type Direction = 'up' | 'down'
 
 export interface MoveBlockAction {
-  type: ActionType.MOVE_BLOCK;
+  type: ActionType.MOVE_BLOCK
   payload: {
-    id: string;
-    direction: Direction;
-  };
+    id: string
+    direction: Direction
+  }
 }
 
 export interface DeleteBlockAction {
-  type: ActionType.DELETE_BLOCK;
+  type: ActionType.DELETE_BLOCK
   payload: {
-    id: string;
-  };
+    id: string
+  }
 }
 
 export interface InsertBlockAction {
-  type: ActionType.INSERT_BLOCK_BEFORE;
+  type: ActionType.INSERT_BLOCK_BEFORE
   payload: {
-    id: string | null;
-    kind: BlockKind;
-  };
+    id: string | null
+    kind: BlockKind
+  }
 }
 
 export interface UpdateBlockAction {
-  type: ActionType.UPDATE_BLOCK;
+  type: ActionType.UPDATE_BLOCK
   payload: {
-    id: string;
-    content: string;
-  };
+    id: string
+    content: string
+  }
 }
 
 export type Action =
   | MoveBlockAction
   | DeleteBlockAction
   | InsertBlockAction
-  | UpdateBlockAction;
+  | UpdateBlockAction

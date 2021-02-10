@@ -1,0 +1,11 @@
+{
+  "printWidth": 80,
+  "semi": false,
+  "singleQuote": true,
+  "arrowParens": "avoid",
+  "bracketSpacing": false,
+  "jsxBracketSameLine": false,
+  "jsxSingleQuote": false,
+  "parser": "babel-ts",
+  "trailingComma": "none"
+}

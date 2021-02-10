@@ -1,7 +1,7 @@
-export type BlockKind = "code" | "text";
+export type BlockKind = 'code' | 'text'
 
 export interface Block {
-  id: string;
-  kind: BlockKind;
-  content: string;
+  id: string
+  kind: BlockKind
+  content: string
 }

@@ -1,20 +1,20 @@
-import { useRef, useEffect, FC } from "react";
-import "./preview.scss";
+import {useRef, useEffect, FC} from 'react'
+import './preview.scss'
 
 interface OwnProps {
-  code: string;
-  bundlerErr: string;
+  code: string
+  bundlerErr: string
 }
 
-const Preview: FC<OwnProps> = ({ code, bundlerErr }) => {
-  const iframeRef = useRef<any>(null);
+const Preview: FC<OwnProps> = ({code, bundlerErr}) => {
+  const iframeRef = useRef<any>(null)
 
   useEffect(() => {
-    iframeRef.current.srcdoc = html;
+    iframeRef.current.srcdoc = html
     setTimeout(() => {
-      iframeRef.current.contentWindow.postMessage(code, "*");
-    }, 75);
-  }, [code]);
+      iframeRef.current.contentWindow.postMessage(code, '*')
+    }, 75)
+  }, [code])
 
   return (
     <div className="preview-wrapper">
@@ -26,8 +26,8 @@ const Preview: FC<OwnProps> = ({ code, bundlerErr }) => {
       />
       {bundlerErr && <div className="preview-error">{bundlerErr}</div>}
     </div>
-  );
-};
+  )
+}
 
 const html = `
 <html lang="en">
@@ -65,6 +65,6 @@ const html = `
     </script>
   </body>
 </html>
-`;
+`
 
-export default Preview;
+export default Preview

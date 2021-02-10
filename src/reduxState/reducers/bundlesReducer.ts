@@ -1,22 +1,22 @@
-import { ActionType } from "../action-types";
-import { Action } from "../actions";
-import { Block } from "../block";
+import {ActionType} from '../action-types'
+import {Action} from '../actions'
+import {Block} from '../block'
 
 interface BlocksState {
-  loading: boolean;
-  error: string | null;
-  order: string[];
+  loading: boolean
+  error: string | null
+  order: string[]
   data: {
-    [key: string]: Block;
-  };
+    [key: string]: Block
+  }
 }
 
 const initialState: BlocksState = {
   loading: false,
   error: null,
   order: [],
-  data: {},
-};
+  data: {}
+}
 
 const reducer = (
   state: BlocksState = initialState,
@@ -24,16 +24,16 @@ const reducer = (
 ): BlocksState => {
   switch (action.type) {
     case ActionType.MOVE_BLOCK:
-      return state;
+      return state
     case ActionType.DELETE_BLOCK:
-      return state;
+      return state
     case ActionType.INSERT_BLOCK_BEFORE:
-      return state;
+      return state
     case ActionType.UPDATE_BLOCK:
-      return state;
+      return state
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default reducer;
+export default reducer
