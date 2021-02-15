@@ -30,12 +30,12 @@ export const deleteBlock = (id: string): DeleteBlockAction => {
   }
 }
 
-export const insertBlockBefore = (
-  id: string,
+export const insertBlockAfter = (
+  id: string | null,
   kind: BlockKind
 ): InsertBlockAction => {
   return {
-    type: ActionType.INSERT_BLOCK_BEFORE,
+    type: ActionType.INSERT_BLOCK_AFTER,
     payload: {
       id,
       kind

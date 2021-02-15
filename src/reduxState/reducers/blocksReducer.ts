@@ -43,7 +43,7 @@ const reducer = produce((state: BlocksState = initialState, action: Action) => {
       state.order = state.order.filter(id => id !== action.payload.id)
       return state
 
-    case ActionType.INSERT_BLOCK_BEFORE:
+    case ActionType.INSERT_BLOCK_AFTER:
       const block: Block = {
         content: '',
         kind: action.payload.kind,
@@ -52,9 +52,9 @@ const reducer = produce((state: BlocksState = initialState, action: Action) => {
       state.data[block.id] = block
       const _index = state.order.findIndex(id => id === action.payload.id)
       if (_index < 0) {
-        state.order.push(block.id)
+        state.order.unshift(block.id)
       } else {
-        state.order.splice(_index, 0, block.id)
+        state.order.splice(_index + 1, 0, block.id)
       }
       return state
 

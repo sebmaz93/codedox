@@ -27,7 +27,7 @@ const reducer = (
       return state
     case ActionType.DELETE_BLOCK:
       return state
-    case ActionType.INSERT_BLOCK_BEFORE:
+    case ActionType.INSERT_BLOCK_AFTER:
       return state
     case ActionType.UPDATE_BLOCK:
       return state

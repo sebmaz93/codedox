@@ -29,7 +29,13 @@ const CodeBlock: React.FC<OwnProps> = ({block}) => {
 
   return (
     <Resizable direction="v">
-      <div style={{height: '100%', display: 'flex', flexDirection: 'row'}}>
+      <div
+        style={{
+          height: 'calc(100% - 10px)',
+          display: 'flex',
+          flexDirection: 'row'
+        }}
+      >
         <Resizable direction="h">
           <CodeEditor
             initialValue={block.content}

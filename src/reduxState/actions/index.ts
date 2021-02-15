@@ -19,7 +19,7 @@ export interface DeleteBlockAction {
 }
 
 export interface InsertBlockAction {
-  type: ActionType.INSERT_BLOCK_BEFORE
+  type: ActionType.INSERT_BLOCK_AFTER
   payload: {
     id: string | null
     kind: BlockKind

@@ -1,7 +1,7 @@
 import {Block} from 'reduxState'
 import CodeBlock from 'components/blocks/code-block'
 import MdBlock from 'components/blocks/md-block'
-import ActionsBar from 'components/action-bar/actions-bar'
+import ActionsBar from 'components/actions-bar/actions-bar'
 import './block-list-item.scss'
 
 interface OwnProps {
