@@ -34,8 +34,28 @@ export interface UpdateBlockAction {
   }
 }
 
+export interface BundleStartAction {
+  type: ActionType.BUNDLE_START
+  payload: {
+    blockId: string
+  }
+}
+
+export interface BundleCompleteAction {
+  type: ActionType.BUNDLE_COMPLETE
+  payload: {
+    blockId: string
+    bundle: {
+      code: string
+      err: string
+    }
+  }
+}
+
 export type Action =
   | MoveBlockAction
   | DeleteBlockAction
   | InsertBlockAction
   | UpdateBlockAction
+  | BundleStartAction
+  | BundleCompleteAction

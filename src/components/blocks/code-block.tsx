@@ -1,31 +1,62 @@
 import {useActions} from 'hooks/use-actions'
-import {useState, useEffect} from 'react'
+import {useTypedSelector} from 'hooks/use-typed-selector'
+import {useEffect, FC} from 'react'
 import {Block} from 'reduxState'
 import CodeEditor from 'components/editors/code-editor'
-import bundler from 'bundler'
 import Preview from 'components/preview/preview'
 import Resizable from 'components/common/resizable'
+import styled, {keyframes} from 'styled-components'
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
+const PreviewWrapperStyled = styled.div`
+  height: 100%;
+  flex-grow: 1;
+  background-color: #fff;
+`
+
+const ProgressCoverStyled = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  animation: ${fadeIn} 500ms;
+`
 
 interface OwnProps {
   block: Block
 }
 
-const CodeBlock: React.FC<OwnProps> = ({block}) => {
-  const [code, setCode] = useState<string>('')
-  const [err, setErr] = useState<string>('')
-  const {updateBlock} = useActions()
+const CodeBlock: FC<OwnProps> = ({block}) => {
+  const {updateBlock, createBundle} = useActions()
+  const bundle = useTypedSelector(state => state.bundles[block.id])
 
   useEffect(() => {
+    if (!bundle) {
+      createBundle(block.id, block.content)
+      return
+    }
     const timer = setTimeout(async () => {
-      const output = await bundler(block.content)
-      setCode(output.code)
-      setErr(output.err)
+      createBundle(block.id, block.content)
     }, 1000)
 
     return () => {
       clearTimeout(timer)
     }
-  }, [block.content])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [block.content, block.id, createBundle])
 
   return (
     <Resizable direction="v">
@@ -42,7 +73,17 @@ const CodeBlock: React.FC<OwnProps> = ({block}) => {
             onChange={value => updateBlock(block.id, value)}
           />
         </Resizable>
-        <Preview code={code} bundlerErr={err} />
+        <PreviewWrapperStyled>
+          {!bundle || bundle.loading ? (
+            <ProgressCoverStyled>
+              <progress className="progress is-small is-primary" max="100">
+                Loading
+              </progress>
+            </ProgressCoverStyled>
+          ) : (
+            <Preview code={bundle.code} bundlerErr={bundle.err} />
+          )}
+        </PreviewWrapperStyled>
       </div>
     </Resizable>
   )

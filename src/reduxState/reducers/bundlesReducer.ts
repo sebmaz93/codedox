@@ -1,39 +1,40 @@
 import {ActionType} from '../action-types'
 import {Action} from '../actions'
-import {Block} from '../block'
+import produce from 'immer'
 
-interface BlocksState {
-  loading: boolean
-  error: string | null
-  order: string[]
-  data: {
-    [key: string]: Block
+interface BundlesState {
+  [key: string]:
+    | {
+        loading: boolean
+        code: string
+        err: string
+      }
+    | undefined
+}
+
+const initialState: BundlesState = {}
+
+const reducer = produce(
+  (state: BundlesState = initialState, action: Action): BundlesState => {
+    switch (action.type) {
+      case ActionType.BUNDLE_START:
+        state[action.payload.blockId] = {
+          loading: true,
+          code: '',
+          err: ''
+        }
+        return state
+      case ActionType.BUNDLE_COMPLETE:
+        state[action.payload.blockId] = {
+          loading: false,
+          code: action.payload.bundle.code,
+          err: action.payload.bundle.err
+        }
+        return state
+      default:
+        return state
+    }
   }
-}
-
-const initialState: BlocksState = {
-  loading: false,
-  error: null,
-  order: [],
-  data: {}
-}
-
-const reducer = (
-  state: BlocksState = initialState,
-  action: Action
-): BlocksState => {
-  switch (action.type) {
-    case ActionType.MOVE_BLOCK:
-      return state
-    case ActionType.DELETE_BLOCK:
-      return state
-    case ActionType.INSERT_BLOCK_AFTER:
-      return state
-    case ActionType.UPDATE_BLOCK:
-      return state
-    default:
-      return state
-  }
-}
+)
 
 export default reducer

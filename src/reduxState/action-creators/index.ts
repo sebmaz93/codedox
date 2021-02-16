@@ -1,10 +1,13 @@
+import bundle from 'bundler'
+import {Dispatch} from 'redux'
 import {ActionType} from '../action-types'
 import {
-  MoveBlockAction,
+  Action,
   DeleteBlockAction,
+  Direction,
   InsertBlockAction,
-  UpdateBlockAction,
-  Direction
+  MoveBlockAction,
+  UpdateBlockAction
 } from '../actions'
 import {BlockKind} from '../block'
 
@@ -51,4 +54,25 @@ export const updateBlock = (id: string, content: string): UpdateBlockAction => {
       content
     }
   }
+}
+
+export const createBundle = (blockId: string, input: string) => async (
+  dispatch: Dispatch<Action>
+) => {
+  dispatch({
+    type: ActionType.BUNDLE_START,
+    payload: {
+      blockId
+    }
+  })
+
+  const result = await bundle(input)
+
+  dispatch({
+    type: ActionType.BUNDLE_COMPLETE,
+    payload: {
+      blockId,
+      bundle: result
+    }
+  })
 }
