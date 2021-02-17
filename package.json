@@ -11,7 +11,7 @@
     "@uiw/react-md-editor": "2.1.8",
     "axios": "0.21.1",
     "bulmaswatch": "0.8.1",
-    "esbuild-wasm": "0.8.33",
+    "esbuild-wasm": "0.8.46",
     "immer": "8.0.1",
     "jscodeshift": "0.11.0",
     "localforage": "1.9.0",
