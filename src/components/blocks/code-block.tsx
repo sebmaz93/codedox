@@ -1,4 +1,5 @@
 import {useActions} from 'hooks/use-actions'
+import {useCumulativeCode} from 'hooks/use-cumulative-code'
 import {useTypedSelector} from 'hooks/use-typed-selector'
 import {useEffect, FC} from 'react'
 import {Block} from 'reduxState'
@@ -42,35 +43,22 @@ interface OwnProps {
 const CodeBlock: FC<OwnProps> = ({block}) => {
   const {updateBlock, createBundle} = useActions()
   const bundle = useTypedSelector(state => state.bundles[block.id])
-  const cumulativeCode = useTypedSelector(state => {
-    const {data, order} = state.blocks
-    const orderedBlocks = order.map(id => data[id])
-    const cumulativeCode = []
-    for (let b of orderedBlocks) {
-      if (b.kind === 'code') {
-        cumulativeCode.push(b.content)
-      }
-      if (b.id === block.id) {
-        break
-      }
-    }
-    return cumulativeCode
-  })
+  const cumulativeCode = useCumulativeCode(block.id)
 
   useEffect(() => {
     if (!bundle) {
-      createBundle(block.id, cumulativeCode.join('\n'))
+      createBundle(block.id, cumulativeCode)
       return
     }
     const timer = setTimeout(async () => {
-      createBundle(block.id, cumulativeCode.join('\n'))
+      createBundle(block.id, cumulativeCode)
     }, 1000)
 
     return () => {
       clearTimeout(timer)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cumulativeCode.join('\n'), block.id, createBundle])
+  }, [cumulativeCode, block.id, createBundle])
 
   return (
     <Resizable direction="v">
