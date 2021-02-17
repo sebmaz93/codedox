@@ -42,21 +42,35 @@ interface OwnProps {
 const CodeBlock: FC<OwnProps> = ({block}) => {
   const {updateBlock, createBundle} = useActions()
   const bundle = useTypedSelector(state => state.bundles[block.id])
+  const cumulativeCode = useTypedSelector(state => {
+    const {data, order} = state.blocks
+    const orderedBlocks = order.map(id => data[id])
+    const cumulativeCode = []
+    for (let b of orderedBlocks) {
+      if (b.kind === 'code') {
+        cumulativeCode.push(b.content)
+      }
+      if (b.id === block.id) {
+        break
+      }
+    }
+    return cumulativeCode
+  })
 
   useEffect(() => {
     if (!bundle) {
-      createBundle(block.id, block.content)
+      createBundle(block.id, cumulativeCode.join('\n'))
       return
     }
     const timer = setTimeout(async () => {
-      createBundle(block.id, block.content)
+      createBundle(block.id, cumulativeCode.join('\n'))
     }, 1000)
 
     return () => {
       clearTimeout(timer)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [block.content, block.id, createBundle])
+  }, [cumulativeCode.join('\n'), block.id, createBundle])
 
   return (
     <Resizable direction="v">
