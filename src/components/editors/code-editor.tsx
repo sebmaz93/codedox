@@ -2,15 +2,22 @@ import MonacoEditor, {OnMount, OnChange} from '@monaco-editor/react'
 import prettier from 'prettier'
 import parser from 'prettier/parser-babel'
 import {useState, useRef, FC} from 'react'
-import codeShift from 'jscodeshift'
+import {parse} from '@babel/parser'
+import traverse from '@babel/traverse'
 import Highlighter from 'monaco-jsx-highlighter'
 import './code-editor.scss'
-import './syntax.scss'
+// import './syntax.scss'
 
 interface CodeEditorProps {
   initialValue: string
   onChange: (value: string) => void
 }
+
+const babelParse = (code: string) =>
+  parse(code, {
+    sourceType: 'module',
+    plugins: ['jsx']
+  })
 
 const CodeEditor: FC<CodeEditorProps> = ({initialValue, onChange}) => {
   const [language] = useState<'javascript' | 'typescript'>('javascript')
@@ -21,13 +28,9 @@ const CodeEditor: FC<CodeEditorProps> = ({initialValue, onChange}) => {
 
     // TODO : find better highlighting options
     /*https://robkendal.co.uk/blog/2020-02-20-creating-a-react-code-editor-and-syntax-highlighter*/
-    const highlighter = new Highlighter(monaco, codeShift, editor)
-    highlighter.highLightOnDidChangeModelContent(
-      () => {},
-      () => {},
-      undefined,
-      () => {}
-    )
+    const highlighter = new Highlighter(monaco, babelParse, traverse, editor)
+    highlighter.highLightOnDidChangeModelContent()
+    highlighter.addJSXCommentCommand()
   }
 
   const handleOnChange: OnChange = (value = '') => {
