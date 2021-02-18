@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/parser": "7.12.16",
-    "@babel/traverse": "7.12.13",
+    "@babel/parser": "7.12.17",
+    "@babel/traverse": "7.12.17",
     "@fortawesome/fontawesome-free": "5.15.2",
     "@monaco-editor/react": "4.0.8",
     "@testing-library/jest-dom": "5.11.9",
