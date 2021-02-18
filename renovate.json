@@ -16,5 +16,6 @@
     "after 10pm every weekday",
     "before 5am every weekday",
     "every weekend"
-  ]
+  ],
+  "ignoreDeps":  ["esbuild-wasm", "monaco-jsx-highlighter"]
 }
