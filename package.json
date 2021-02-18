@@ -66,6 +66,6 @@
     "@types/react-resizable": "1.7.2",
     "@types/styled-components": "5.1.7",
     "@types/uuid": "8.3.0",
-    "sass": "1.32.7"
+    "sass": "1.32.8"
   }
 }
