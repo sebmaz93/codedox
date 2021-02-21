@@ -17,5 +17,5 @@
     "before 5am every weekday",
     "every weekend"
   ],
-  "ignoreDeps":  ["esbuild-wasm", "monaco-jsx-highlighter"]
+  "ignoreDeps":  ["esbuild-wasm", "monaco-jsx-highlighter","@babel/parser","@babel/traverse","react-scripts"]
 }
