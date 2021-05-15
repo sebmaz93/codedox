@@ -1,5 +1,5 @@
 import {ActionType} from '../action-types'
-import {BlockKind} from '../block'
+import {Block, BlockKind} from '../block'
 
 export type Direction = 'up' | 'down'
 
@@ -52,6 +52,25 @@ export interface BundleCompleteAction {
   }
 }
 
+export interface FetchBlocksAction {
+  type: ActionType.FETCH_BLOCKS
+}
+
+export interface FetchBlocksCompleteAction {
+  type: ActionType.FETCH_BLOCKS_COMPLETE
+  payload: Block[]
+}
+
+export interface FetchBlocksErrorAction {
+  type: ActionType.FETCH_BLOCKS_ERROR
+  payload: string
+}
+
+export interface SaveBlocksError {
+  type: ActionType.SAVE_BLOCKS_ERROR
+  payload: string
+}
+
 export type Action =
   | MoveBlockAction
   | DeleteBlockAction
@@ -59,3 +78,7 @@ export type Action =
   | UpdateBlockAction
   | BundleStartAction
   | BundleCompleteAction
+  | FetchBlocksAction
+  | FetchBlocksCompleteAction
+  | FetchBlocksErrorAction
+  | SaveBlocksError

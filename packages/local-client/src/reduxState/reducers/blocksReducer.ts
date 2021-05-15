@@ -27,6 +27,28 @@ const initialState: BlocksState = {
 
 const reducer = produce((state: BlocksState = initialState, action: Action) => {
   switch (action.type) {
+    case ActionType.SAVE_BLOCKS_ERROR:
+      state.error = action.payload
+      return state
+
+    case ActionType.FETCH_BLOCKS:
+      state.loading = true
+      state.error = null
+      return state
+
+    case ActionType.FETCH_BLOCKS_COMPLETE:
+      state.order = action.payload.map(block => block.id)
+      state.data = action.payload.reduce((acc, block) => {
+        acc[block.id] = block
+        return acc
+      }, {} as BlocksState['data'])
+      return state
+
+    case ActionType.FETCH_BLOCKS_ERROR:
+      state.loading = false
+      state.error = action.payload
+      return state
+
     case ActionType.MOVE_BLOCK:
       const index = state.order.findIndex(id => id === action.payload.id)
       const targetIndex =

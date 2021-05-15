@@ -1,5 +1,7 @@
+import axios from 'axios'
 import bundle from 'bundler'
 import {Dispatch} from 'redux'
+import {RootState} from 'reduxState/reducers'
 import {ActionType} from '../action-types'
 import {
   Action,
@@ -9,7 +11,7 @@ import {
   MoveBlockAction,
   UpdateBlockAction
 } from '../actions'
-import {BlockKind} from '../block'
+import {Block, BlockKind} from '../block'
 
 export const moveBlock = (
   id: string,
@@ -75,4 +77,30 @@ export const createBundle = (blockId: string, input: string) => async (
       bundle: result
     }
   })
+}
+
+export const fetchBlock = () => async (dispatch: Dispatch<Action>) => {
+  dispatch({type: ActionType.FETCH_BLOCKS})
+  try {
+    const {data}: {data: Block[]} = await axios.get('/blocks')
+    dispatch({type: ActionType.FETCH_BLOCKS_COMPLETE, payload: data})
+  } catch (err) {
+    dispatch({type: ActionType.FETCH_BLOCKS_ERROR, payload: err.message})
+  }
+}
+
+export const saveBlocks = () => async (
+  dispatch: Dispatch<Action>,
+  getState: () => RootState
+) => {
+  const {
+    blocks: {data, order}
+  } = getState()
+
+  const blocks = order.map(id => data[id])
+  try {
+    await axios.post('blocks', {blocks})
+  } catch (err) {
+    dispatch({type: ActionType.SAVE_BLOCKS_ERROR, payload: err.message})
+  }
 }
