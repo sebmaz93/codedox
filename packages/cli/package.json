@@ -1,17 +1,24 @@
 {
-  "name": "cli",
+  "name": "codedox",
   "version": "1.0.0",
-  "description": "",
+  "description": "Write your code documentations and examples with on web bundling and live executing",
+  "bin": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc --watch --preserveWatchOutput"
+    "start": "tsc --watch --preserveWatchOutput",
+    "prepublishOnly": "tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "sebmaz93",
   "license": "ISC",
   "dependencies": {
     "commander": "^7.1.0",
-    "local-api": "^1.0.0"
+    "@codedox/local-api": "^1.0.0"
   },
   "devDependencies": {
     "typescript": "^4.1.5"

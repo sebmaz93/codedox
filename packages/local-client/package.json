@@ -1,8 +1,25 @@
 {
-  "name": "local-client",
+  "name": "@codedox/local-client",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "build"
+  ],
+  "devDependencies": {
+    "@types/jest": "26.0.20",
+    "@types/jscodeshift": "0.7.2",
+    "@types/node": "14.14.28",
+    "@types/prettier": "2.2.1",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.1",
+    "@types/react-redux": "7.1.16",
+    "@types/react-resizable": "1.7.2",
+    "@types/styled-components": "5.1.7",
+    "@types/uuid": "8.3.0",
+    "lerna": "3.22.1",
+    "sass": "1.32.7",
     "@babel/parser": "7.12.16",
     "@babel/traverse": "7.12.13",
     "@fortawesome/fontawesome-free": "5.15.2",
@@ -35,7 +52,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepublishOnly": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -54,19 +72,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/jest": "26.0.20",
-    "@types/jscodeshift": "0.7.2",
-    "@types/node": "14.14.28",
-    "@types/prettier": "2.2.1",
-    "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.1",
-    "@types/react-redux": "7.1.16",
-    "@types/react-resizable": "1.7.2",
-    "@types/styled-components": "5.1.7",
-    "@types/uuid": "8.3.0",
-    "lerna": "3.22.1",
-    "sass": "1.32.7"
   }
 }

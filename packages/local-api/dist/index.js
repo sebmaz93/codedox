@@ -19,7 +19,7 @@ var serve = function (port, filename, dir, useProxy) {
         }));
     }
     else {
-        var packagePath = path_1.default.resolve('local-client/build/index.html');
+        var packagePath = path_1.default.resolve('@codedox/local-client/build/index.html');
         app.use(express_1.default.static(path_1.default.dirname(packagePath)));
     }
     return new Promise(function (resolve, reject) {
