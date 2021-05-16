@@ -21,9 +21,9 @@
   },
   "devDependencies": {
     "@codedox/local-api": "^1.0.2",
-    "commander": "^7.1.0",
+    "commander": "7.1.0",
     "esbuild": "0.11.22",
-    "typescript": "^4.1.5"
+    "typescript": "4.1.5"
   },
   "gitHead": "fd49ad81a119dc650f04520316ec6ade20f77df2"
 }
