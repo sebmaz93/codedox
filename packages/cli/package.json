@@ -20,9 +20,9 @@
     "@codedox/local-client": "^1.0.0"
   },
   "devDependencies": {
-    "esbuild": "0.11.22",
-    "typescript": "^4.1.5",
     "@codedox/local-api": "^1.0.0",
-    "commander": "^7.1.0"
+    "commander": "^7.1.0",
+    "esbuild": "0.11.22",
+    "typescript": "^4.1.5"
   }
 }
