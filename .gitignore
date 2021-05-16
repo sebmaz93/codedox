@@ -12,6 +12,7 @@ node_modules
 # production
 build
 dist
+dist/
 
 # misc
 .DS_Store
@@ -26,4 +27,4 @@ yarn-debug.log*
 yarn-error.log*
 /packages/local-api/dist
 /packages/cli/dist
-/lerna-debug.log
+lerna-debug.log
