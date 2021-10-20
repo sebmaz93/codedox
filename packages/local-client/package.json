@@ -10,7 +10,7 @@
   "devDependencies": {
     "@babel/parser": "7.12.16",
     "@babel/traverse": "7.12.13",
-    "@fortawesome/fontawesome-free": "5.15.2",
+    "@fortawesome/fontawesome-free": "5.15.4",
     "@monaco-editor/react": "4.0.8",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
