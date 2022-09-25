@@ -25,7 +25,7 @@
     "@types/react-resizable": "1.7.2",
     "@types/styled-components": "5.1.7",
     "@types/uuid": "8.3.0",
-    "@uiw/react-md-editor": "2.1.8",
+    "@uiw/react-md-editor": "2.1.11",
     "axios": "0.21.1",
     "bulmaswatch": "0.8.1",
     "esbuild-wasm": "0.11.22",
